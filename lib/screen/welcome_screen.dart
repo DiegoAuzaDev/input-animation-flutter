@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  Color colorBegin = const Color.fromRGBO(0, 174, 239, 1);
+  Color colorEnd = const Color.fromRGBO(0, 68, 129, 1);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromRGBO(0, 174, 239, 1),
-            Color.fromRGBO(0, 68, 129, 1),
+            colorBegin,
+            colorEnd,
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -22,13 +31,13 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                "assets/img/smart_clean.png",
-                width: 75,
-                height: 75,
+              LottieBuilder.asset(
+                "assets/welcomeAnimation.json",
+                width: double.infinity,
+                height: 150,
               ),
               const SizedBox(
-                height: 20,
+                height: 35,
               ),
               Text(
                 "Bienvenido a Smart",
@@ -94,35 +103,35 @@ class WelcomeScreen extends StatelessWidget {
 //               )
 
 //   return Scaffold(
-  //     body: Stack(
-  //       children: [
-  //         Container(
-  //           width: double.infinity,
-  //           color: Colors.blue,
-  //         ),
-  //         SafeArea(
-  //           bottom: false,
-  //           child: Container(
-  //             height: 100,
-  //             width: double.infinity,
-  //             color: Colors.yellow,
-  //           ),
-  //         ),
-  //         Positioned(
-  //           bottom: 0,
-  //           child: Container(
-  //             height: 100,
-  //             width: double.infinity,
-  //             color: Colors.red,
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
+//     body: Stack(
+//       children: [
+//         Container(
+//           width: double.infinity,
+//           color: Colors.blue,
+//         ),
+//         SafeArea(
+//           bottom: false,
+//           child: Container(
+//             height: 100,
+//             width: double.infinity,
+//             color: Colors.yellow,
+//           ),
+//         ),
+//         Positioned(
+//           bottom: 0,
+//           child: Container(
+//             height: 100,
+//             width: double.infinity,
+//             color: Colors.red,
+//           ),
+//         )
+//       ],
+//     ),
+//   );
+// }
 
-    // LottieBuilder.asset(
-    //           "assets/welcomeAnimation.json",
-    //           width: 200,
-    //           height: 200,
-    //         ),
+// LottieBuilder.asset(
+//           "assets/welcomeAnimation.json",
+//           width: 200,
+//           height: 200,
+//         ),
