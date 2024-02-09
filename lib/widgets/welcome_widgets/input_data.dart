@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:input_flutter_animation/model/smart_enum.dart';
+import 'package:input_flutter_animation/widgets/scaffold_messenger/scaffold_messenger.dart';
 
 class InputUser extends StatefulWidget {
   const InputUser({super.key});
@@ -32,7 +34,28 @@ class _InputUserState extends State<InputUser> {
     return null;
   }
 
-  void authUserInput() {}
+  void authUserInput() {
+    FocusScope.of(context).unfocus();
+    final isValidFormInput = _formKey.currentState!.validate();
+    if (!isValidFormInput) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      showActionSnackBar(
+        context,
+        SnackBarType.error,
+        "this a the content",
+        "this a the content",
+      );
+      return;
+    }
+    ScaffoldMessenger.of(context).clearSnackBars();
+    showActionSnackBar(
+      context,
+      SnackBarType.success,
+      "this a the content",
+      "this a the content",
+    );
+    _formKey.currentState!.save();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +102,7 @@ class _InputUserState extends State<InputUser> {
                     // ------- GET EMPLOYER ID -----
                     TextFormField(
                       validator: (value) {
-                        validateUserInput(value);
+                        return validateUserInput(value);
                       },
                       onSaved: (value) {
                         employerID = value!;
@@ -90,6 +113,7 @@ class _InputUserState extends State<InputUser> {
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
+                        errorMaxLines: 2,
                         labelText: "Identificador empresa",
                         icon: Icon(
                           Icons.work_rounded,
@@ -99,14 +123,25 @@ class _InputUserState extends State<InputUser> {
                     ),
                     // ------- GET EMPLOYER ID -----
                     //
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    //
                     // ------- GET EMPLOYEE ID -----
                     TextFormField(
                       keyboardType: TextInputType.number,
                       autocorrect: false,
                       maxLength: 20,
+                      validator: (value) {
+                        return validateUserInput(value);
+                      },
+                      onSaved: (value) {
+                        employerID = value!;
+                      },
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
+                        errorMaxLines: 2,
                         labelText: "Mi identificador",
                         icon: Icon(Icons.person,
                             color: Theme.of(context).colorScheme.primary),
@@ -123,7 +158,9 @@ class _InputUserState extends State<InputUser> {
                               Theme.of(context).colorScheme.onPrimary,
                           backgroundColor:
                               Theme.of(context).colorScheme.primary),
-                      onPressed: authUserInput,
+                      onPressed: () {
+                        authUserInput();
+                      },
                       child: const Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
