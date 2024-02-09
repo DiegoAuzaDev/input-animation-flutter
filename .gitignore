@@ -17,7 +17,7 @@ migrate_working_dir/
 .idea/
 
 # my secrets key
-./lib/config/dart_secret.dart
+/dart_secret.dart
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
