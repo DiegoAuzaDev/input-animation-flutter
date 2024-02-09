@@ -38,8 +38,8 @@ class RequestPermissions extends StatelessWidget {
             children: [
               LottieBuilder.asset(
                 Theme.of(context).colorScheme.brightness == Brightness.dark
-                    ? "assets/welcomeAnimationDark.json"
-                    : "assets/welcomeAnimationLight.json",
+                    ? "assets/welcomeAnimationLight.json"
+                    : "assets/welcomeAnimationDark.json",
                 width: double.infinity,
                 height: 150,
               ),
