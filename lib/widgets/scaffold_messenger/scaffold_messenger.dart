@@ -17,10 +17,10 @@ Color setContainerColor(SnackBarType type, BuildContext context) {
   return containerColor;
 }
 
-Icon setContainerIcon(SnackBarType type, BuildContext context) {
+Icon setContainerIcon(SnackBarType type) {
   Icon containerIcon = Icon(
     Icons.check_circle_sharp,
-    color: Theme.of(context).colorScheme.onPrimaryContainer,
+    color: AppTheme.colors.white,
     size: 35,
   );
   switch (type) {
@@ -28,14 +28,14 @@ Icon setContainerIcon(SnackBarType type, BuildContext context) {
       containerIcon = Icon(
         size: 35,
         Icons.error_sharp,
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
+        color: AppTheme.colors.white,
       );
       break;
     case SnackBarType.warning:
       containerIcon = Icon(
         size: 35,
         Icons.warning_sharp,
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
+        color: AppTheme.colors.white,
       );
       break;
     default:
@@ -72,7 +72,7 @@ void showActionSnackBar(BuildContext context, SnackBarType snackBarType,
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      color: AppTheme.colors.white,
                     ),
                   ),
                 ),
@@ -84,13 +84,13 @@ void showActionSnackBar(BuildContext context, SnackBarType snackBarType,
                       style: TextStyle(
                         fontSize:
                             Theme.of(context).textTheme.bodyMedium!.fontSize,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                        color: AppTheme.colors.white,
                       ),
                     ),
                   ),
               ],
             ),
-            setContainerIcon(snackBarType, context),
+            setContainerIcon(snackBarType),
           ],
         ),
       ),
