@@ -17,10 +17,10 @@ Color setContainerColor(SnackBarType type, BuildContext context) {
   return containerColor;
 }
 
-Icon setContainerIcon(SnackBarType type) {
+Icon setContainerIcon(SnackBarType type, BuildContext context) {
   Icon containerIcon = Icon(
     Icons.check_circle_sharp,
-    color: AppTheme.colors.white,
+    color: Theme.of(context).colorScheme.onPrimaryContainer,
     size: 35,
   );
   switch (type) {
@@ -28,14 +28,14 @@ Icon setContainerIcon(SnackBarType type) {
       containerIcon = Icon(
         size: 35,
         Icons.error_sharp,
-        color: AppTheme.colors.white,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
       );
       break;
     case SnackBarType.warning:
       containerIcon = Icon(
         size: 35,
         Icons.warning_sharp,
-        color: AppTheme.colors.white,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
       );
       break;
     default:
@@ -90,7 +90,7 @@ void showActionSnackBar(BuildContext context, SnackBarType snackBarType,
                   ),
               ],
             ),
-            setContainerIcon(snackBarType),
+            setContainerIcon(snackBarType, context),
           ],
         ),
       ),
