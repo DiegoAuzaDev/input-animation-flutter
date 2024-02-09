@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Brightness themeBrightness = Brightness.light;
+  Brightness themeBrightness = Brightness.dark;
 
   @override
   Widget build(BuildContext context) {
