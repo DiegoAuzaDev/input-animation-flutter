@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:input_flutter_animation/widgets/welcome_widgets/welcome_input_data.dart';
-import 'package:input_flutter_animation/widgets/welcome_widgets/welcome_request_permissions.dart';
+import 'package:input_flutter_animation/widgets/welcome_widgets/input_data.dart';
+import 'package:input_flutter_animation/widgets/welcome_widgets/request_permissions.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({super.key});
+  const WelcomeScreen({super.key, required this.deviceTheme});
+
+  final Brightness deviceTheme;
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -24,7 +26,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     if (permissionGranted) {
       return const InputUser();
     }
-    return RequestPermissions(changeHomeWidgte: widgetChanger);
+    return RequestPermissions(
+      changeHomeWidgte: widgetChanger,
+      themeBrightness: widget.deviceTheme,
+    );
   }
 
   @override

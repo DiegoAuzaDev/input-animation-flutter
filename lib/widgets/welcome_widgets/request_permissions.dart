@@ -2,14 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class RequestPermissions extends StatelessWidget {
-  const RequestPermissions({super.key, required this.changeHomeWidgte});
+  const RequestPermissions(
+      {super.key,
+      required this.changeHomeWidgte,
+      required this.themeBrightness});
 
   final void Function() changeHomeWidgte;
+  final Brightness themeBrightness;
 
   @override
   Widget build(BuildContext context) {
-    Color colorBegin = const Color.fromRGBO(0, 174, 239, 1);
-    Color colorEnd = const Color.fromRGBO(0, 68, 129, 1);
+    Color colorBegin = themeBrightness == Brightness.light
+        ? const Color.fromRGBO(0, 174, 239, 1)
+        : const Color.fromARGB(255, 0, 116, 158);
+    Color colorEnd = themeBrightness == Brightness.light
+        ? const Color.fromRGBO(0, 68, 129, 1)
+        : const Color.fromARGB(255, 0, 29, 55);
     return Container(
       height: double.infinity,
       decoration: BoxDecoration(

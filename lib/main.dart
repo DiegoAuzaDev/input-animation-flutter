@@ -14,10 +14,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Brightness themeBrightness = Brightness.dark;
-
   @override
   Widget build(BuildContext context) {
+    Brightness themeBrightness = MediaQuery.of(context).platformBrightness;
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -30,7 +29,9 @@ class _MyAppState extends State<MyApp> {
         ),
         textTheme: GoogleFonts.soraTextTheme(),
       ),
-      home: const WelcomeScreen(),
+      home: WelcomeScreen(
+        deviceTheme: themeBrightness,
+      ),
     );
   }
 }
