@@ -39,21 +39,10 @@ class _InputUserState extends State<InputUser> {
     final isValidFormInput = _formKey.currentState!.validate();
     if (!isValidFormInput) {
       ScaffoldMessenger.of(context).clearSnackBars();
-      showActionSnackBar(
-        context,
-        SnackBarType.error,
-        "this a the content",
-        "this a the content",
-      );
+      showActionSnackBar(context, SnackBarType.error, "Valores invalidos",
+          "ingrese de forma correcta los valores para continuar", 3);
       return;
     }
-    ScaffoldMessenger.of(context).clearSnackBars();
-    showActionSnackBar(
-      context,
-      SnackBarType.success,
-      "this a the content",
-      "this a the content",
-    );
     _formKey.currentState!.save();
   }
 
