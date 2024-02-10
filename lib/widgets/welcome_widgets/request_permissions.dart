@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+
 class RequestPermissions extends StatelessWidget {
   const RequestPermissions(
       {super.key,
