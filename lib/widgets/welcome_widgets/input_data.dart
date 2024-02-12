@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:input_flutter_animation/config/location_request.dart';
 import 'package:input_flutter_animation/model/smart_enum.dart';
+import 'package:input_flutter_animation/screen/map_screen.dart';
 import 'package:input_flutter_animation/widgets/scaffold_messenger/scaffold_messenger.dart';
 import 'package:location/location.dart';
 
@@ -42,7 +43,7 @@ class _InputUserState extends State<InputUser> {
     return null;
   }
 
-  void authUserInput() {
+  void authUserInput() async {
     FocusScope.of(context).unfocus();
     final isValidFormInput = _formKey.currentState!.validate();
     if (!isValidFormInput) {
@@ -53,6 +54,14 @@ class _InputUserState extends State<InputUser> {
     _formKey.currentState!.save();
     setState(() {
       isLoadind = true;
+    });
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MapScreen(),
+        ),
+      );
     });
   }
 
