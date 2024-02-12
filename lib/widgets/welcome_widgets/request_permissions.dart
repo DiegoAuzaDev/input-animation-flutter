@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:input_flutter_animation/config/location_request.dart';
+import 'package:input_flutter_animation/model/smart_enum.dart';
+import 'package:input_flutter_animation/widgets/scaffold_messenger/scaffold_messenger.dart';
+import 'package:location/location.dart';
 import 'package:lottie/lottie.dart';
 
-
-class RequestPermissions extends StatelessWidget {
+class RequestPermissions extends StatefulWidget {
   const RequestPermissions(
       {super.key,
       required this.changeHomeWidgte,
@@ -12,11 +15,16 @@ class RequestPermissions extends StatelessWidget {
   final Brightness themeBrightness;
 
   @override
+  State<RequestPermissions> createState() => _RequestPermissionsState();
+}
+
+class _RequestPermissionsState extends State<RequestPermissions> {
+  @override
   Widget build(BuildContext context) {
-    Color colorBegin = themeBrightness == Brightness.light
+    Color colorBegin = widget.themeBrightness == Brightness.light
         ? const Color.fromRGBO(0, 174, 239, 1)
         : const Color.fromARGB(255, 0, 116, 158);
-    Color colorEnd = themeBrightness == Brightness.light
+    Color colorEnd = widget.themeBrightness == Brightness.light
         ? const Color.fromRGBO(0, 68, 129, 1)
         : const Color.fromARGB(255, 0, 29, 55);
     return Container(
@@ -73,7 +81,23 @@ class RequestPermissions extends StatelessWidget {
                     foregroundColor: Theme.of(context).colorScheme.onPrimary,
                     backgroundColor:
                         Theme.of(context).colorScheme.onPrimaryContainer),
-                onPressed: changeHomeWidgte,
+                onPressed: () async {
+                  UserLocationRequest location = UserLocationRequest();
+                  bool requestuserLoation = await location.requesUserLocation();
+                  if (!context.mounted) {
+                    return;
+                  }
+                  if (requestuserLoation) {
+                    widget.changeHomeWidgte();
+                  } else {
+                    showActionSnackBar(
+                        context,
+                        SnackBarType.error,
+                        "Valores invalidos",
+                        "ingrese de forma correcta los valores para continuar",
+                        3);
+                  }
+                },
                 child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
