@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:input_flutter_animation/config/location_request.dart';
 import 'package:input_flutter_animation/model/smart_enum.dart';
 import 'package:input_flutter_animation/widgets/scaffold_messenger/scaffold_messenger.dart';
-import 'package:location/location.dart';
 import 'package:lottie/lottie.dart';
 
 class RequestPermissions extends StatefulWidget {
@@ -83,6 +82,7 @@ class _RequestPermissionsState extends State<RequestPermissions> {
                         Theme.of(context).colorScheme.onPrimaryContainer),
                 onPressed: () async {
                   UserLocationRequest location = UserLocationRequest();
+
                   bool requestuserLoation = await location.requesUserLocation();
                   if (!context.mounted) {
                     return;
@@ -92,10 +92,11 @@ class _RequestPermissionsState extends State<RequestPermissions> {
                   } else {
                     showActionSnackBar(
                         context,
-                        SnackBarType.error,
-                        "Valores invalidos",
-                        "ingrese de forma correcta los valores para continuar",
+                        SnackBarType.warning,
+                        "Servicio de ubucacion desabilidato",
+                        "Haga tap aqui para habilitar servicio",
                         3);
+                    widget.changeHomeWidgte();
                   }
                 },
                 child: const Row(

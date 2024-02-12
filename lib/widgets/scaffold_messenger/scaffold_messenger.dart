@@ -46,8 +46,10 @@ Icon setContainerIcon(SnackBarType type) {
 
 void showActionSnackBar(BuildContext context, SnackBarType snackBarType,
     String snackBarTitle, String? snackBarContent, int duration) {
+  ScaffoldMessenger.of(context).clearSnackBars();
   double width = MediaQuery.of(context).size.width / 2;
   final snackBar = SnackBar(
+    behavior: SnackBarBehavior.floating,
     duration: Duration(seconds: duration),
     elevation: 0,
     backgroundColor: Colors.transparent,
@@ -71,7 +73,8 @@ void showActionSnackBar(BuildContext context, SnackBarType snackBarType,
                     snackBarTitle,
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
-                      fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
+                      fontSize:
+                          Theme.of(context).textTheme.labelMedium!.fontSize,
                       color: AppTheme.colors.white,
                     ),
                   ),
@@ -83,7 +86,7 @@ void showActionSnackBar(BuildContext context, SnackBarType snackBarType,
                       snackBarContent,
                       style: TextStyle(
                         fontSize:
-                            Theme.of(context).textTheme.bodyMedium!.fontSize,
+                            Theme.of(context).textTheme.labelSmall!.fontSize,
                         color: AppTheme.colors.white,
                       ),
                     ),

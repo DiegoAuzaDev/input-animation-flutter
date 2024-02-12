@@ -7,8 +7,8 @@
 
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Smart necesita tener acceso a tu ubicacion</string>
-	<key>UIBackgroundModes</key>
-	<string>location</string>
+
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

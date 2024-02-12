@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:input_flutter_animation/config/location_request.dart';
 import 'package:input_flutter_animation/model/smart_enum.dart';
 import 'package:input_flutter_animation/widgets/scaffold_messenger/scaffold_messenger.dart';
+import 'package:location/location.dart';
 
 class InputUser extends StatefulWidget {
   const InputUser({super.key});
@@ -10,6 +12,10 @@ class InputUser extends StatefulWidget {
 }
 
 class _InputUserState extends State<InputUser> {
+  UserLocationRequest currentLocation = UserLocationRequest();
+
+  late LocationData _locationData;
+
   final String _invalidLengthMessage =
       "Por favor ingrese un valor que tenga como minimo 6 digitos";
   final String _invalidValueTypeMessage =
@@ -40,7 +46,6 @@ class _InputUserState extends State<InputUser> {
     FocusScope.of(context).unfocus();
     final isValidFormInput = _formKey.currentState!.validate();
     if (!isValidFormInput) {
-      ScaffoldMessenger.of(context).clearSnackBars();
       showActionSnackBar(context, SnackBarType.error, "Valores invalidos",
           "ingrese de forma correcta los valores para continuar", 3);
       return;
@@ -51,8 +56,13 @@ class _InputUserState extends State<InputUser> {
     });
   }
 
+  void getLocation() async {
+    _locationData = await currentLocation.location.getLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
+    getLocation();
     Widget loadingIndicator = Card(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),

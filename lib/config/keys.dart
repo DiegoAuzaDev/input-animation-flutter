@@ -1,1 +1,1 @@
-const googleMapKey = String.fromEnvironment("GOOGLE_MAP_KEY", defaultValue: "");
+const googleMapKey = "AIzaSyADefy99YHhgP8oXonhQn02ILRKWrDomxs";
