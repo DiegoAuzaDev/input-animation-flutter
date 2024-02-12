@@ -50,19 +50,22 @@ class _InputUserState extends State<InputUser> {
       showActionSnackBar(context, SnackBarType.error, "Valores invalidos",
           "ingrese de forma correcta los valores para continuar", 3);
       return;
+    } else {
+      _formKey.currentState!.save();
+      setState(() {
+        isLoadind = true;
+      });
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MapScreen(
+              userLocation: _locationData,
+            ),
+          ),
+        );
+      });
     }
-    _formKey.currentState!.save();
-    setState(() {
-      isLoadind = true;
-    });
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MapScreen(),
-        ),
-      );
-    });
   }
 
   void getLocation() async {
