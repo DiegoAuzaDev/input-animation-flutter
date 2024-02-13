@@ -33,19 +33,140 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: userLatLng,
-              zoom: 14.4746,
+          Positioned.fill(
+            bottom: MediaQuery.of(context).size.height * 0.2,
+            child: GoogleMap(
+              mapType: MapType.satellite,
+              zoomControlsEnabled: false,
+              initialCameraPosition: CameraPosition(
+                target: userLatLng,
+                zoom: 14.4746,
+              ),
+              markers: {
+                Marker(
+                  markerId: const MarkerId("USER_ID_UNIQUE"),
+                  position: LatLng(userLatLng.latitude, userLatLng.longitude),
+                )
+              },
             ),
-            markers: {
-              Marker(
-                markerId: const MarkerId("USER_ID_UNIQUE"),
-                position: LatLng(userLatLng.latitude, userLatLng.longitude),
-              )
-            },
           ),
-          const MapButtons(),
+          const Positioned(
+            top: 1,
+            right: 1,
+            child: MapButtons(),
+          ),
+          Positioned.fill(
+            bottom: 0,
+            child: DraggableScrollableSheet(
+              expand: true,
+              initialChildSize: 0.25,
+              minChildSize: 0.25,
+              maxChildSize: 0.8,
+              builder: (context, scrollController) {
+                return Material(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  color: Theme.of(context).colorScheme.background,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 15,
+                          right: 15,
+                          top: 20,
+                          bottom: 10,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    child: Text(
+                                      "Ruta Florest Sur - Diego Auza",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.fade,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium!
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "\u2022 Tiempo 6 Horas",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  "\u2022 Paradas 20",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  "\u2022 Distancia 15KM",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelSmall!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          controller: scrollController,
+                          itemCount: 20,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              leading: const Icon(
+                                Icons.location_on_rounded,
+                              ),
+                              title: Text("Tienda donde pedro #$index"),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
